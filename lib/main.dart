@@ -55,9 +55,17 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
           ),
-          ElevatedButton(onPressed: timerController.startTime,
-            child: const Text('start'),
-          ),
+          ValueListenableBuilder(
+            valueListenable: timerController,
+            builder: (_, value, __) {
+              return ElevatedButton(onPressed: timerController.startTime,
+                child: Visibility(
+                  visible: timerController.running,
+                  child: const Text('stop'),
+                  replacement: const Text('start'),
+                ),
+              );    
+          },),
         ],
       ),
     );
